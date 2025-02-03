@@ -30,20 +30,13 @@ export class TasksController {
 
   static getTaskId = async (req:Request, res : Response) => {
     try {
-      const {id} = req.params
-      //para obtener la informacion de los proyectos
-      const task = await Task.findById(id)
-
-      if(!task){
-        res.status(404).json({msg:'Tarea no encontrada'})
-      }
       
-      //verificamos que sea del mismo proyecto la tarea
-      if(task.project.toString() !== req.project.id){
-        res.status(400).json({msg:'Accion no valida'})
-      }
+      //verificamos que sea del mismo proyecto la tarea - Lo traemos desde el middleware 
+      // if(req.task.project.toString() !== req.project.id){
+      //   res.status(400).json({msg:'Accion no valida'})
+      // }
 
-      res.json(task)
+      res.json(req.task)
     } catch (error) {
       res.status(500).json({error : 'Producto no encontrado' })
     }
@@ -51,42 +44,21 @@ export class TasksController {
 
   static updateTask = async (req:Request, res : Response) => {
     try {
-      const {id} = req.params
-      const task = await Task.findById(id, req.body)
-
-      if(!task){
-        res.status(404).json({msg:'Tarea no encontrada'})
-      }
-      
-      //verificamos que sea del mismo proyecto la tarea
-      if(task.project.toString() !== req.project.id){
-        res.status(400).json({msg:'Accion no valida'})
-      }
-      task.save()
-      res.json(task)
+      req.task.name = req.body.name
+      req.task.description = req.body.description
+      await req.task.save()
+      res.send('Tarea actualizada')
     } catch (error) {
-      res.status(500).json({error : 'Producto no encontrado' })
+      res.status(500).json({error : 'Tarea no encontrada' })
     }
   }
 
   static deleteTask = async (req:Request, res : Response) => {
     try {
-      const {id} = req.params
-      const task = await Task.findById(id)
-
-      if(!task){
-        res.status(404).json({msg:'Tarea no encontrada'})
-      }
-      
-      //verificamos que sea del mismo proyecto la tarea
-      if(task.project.toString() !== req.project.id){
-        res.status(400).json({msg:'Accion no valida'})
-      }
-
       //eliminar la tarea del array del proyecto
-      req.project.tasks = req.project.tasks.filter( task => task.toString() !== id)
+      req.project.tasks = req.project.tasks.filter( task => task.toString() !== req.task.id.toString())
       
-      await Promise.allSettled([task.deleteOne(), req.project.save()])
+      await Promise.allSettled([req.task.deleteOne(), req.project.save()])
 
       res.json({msg : 'Tarea eliminada correctamente'})
     } catch (error) {
@@ -97,14 +69,15 @@ export class TasksController {
   //para cambiar el estado
   static updateStatus = async (req : Request, res : Response) => {
     try {
-      const {taskId} = req.params
-      const task = await Task.findById(taskId)
-      if(!task){
-        res.status(404).json({error : 'Tarea no encontrada'})
-      }
+      //Lo vamos a traer del middleware
+      // const {taskId} = req.params
+      // const task = await Task.findById(taskId)
+      // if(!task){
+      //   res.status(404).json({error : 'Tarea no encontrada'})
+      // }
       const {status} = req.body
-      task.status = status
-      await task.save()
+      req.task.status = status
+      await req.task.save()
       res.send('Tarea actualizada')
     } catch (error) {
       res.status(500).json({error : 'Producto no encontrado' })

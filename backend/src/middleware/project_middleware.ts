@@ -10,7 +10,7 @@ declare global{
   }
 }
 
-export async function validateProject(req:Request,res:Response,next:NextFunction) {
+export async function projectExists(req:Request,res:Response,next:NextFunction) {
   try {
     //traemos el id del proyecto donde se va a crear la tarea
     const {projectId} = req.params
