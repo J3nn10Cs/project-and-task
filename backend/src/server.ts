@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import cors from "cors";
+import morgan from 'morgan'
 import { corsConfig } from "./config/cors";
 import { connectDB } from "./config/db";
 import projectRoutes from "./routes/projectRoutes";
@@ -16,7 +17,10 @@ const app = express()
 //permitimos las conexiones
 app.use(cors(corsConfig))
 
-//habilitamos la lectura del formato json
+//Loggin
+app.use(morgan('dev'))
+
+//habilitamos la lectura del formato json - formularios
 app.use(express.json())
 
 //Routes

@@ -47,16 +47,21 @@ export class ProjectController {
     const {id} = req.params
     try {
       //lo busca y le pasamos la info que requerimos
-      const project = await Project.findByIdAndUpdate(id, req.body)
+      const project = await Project.findById(id)
 
       if(!project){
         //no se encuenta
         res.status(404).json({msg : 'Producto no encontrado' })
         return
       }
+      
+      //pasamos sollo lo que queremos actualizar
+      project.clientName = req.body.clientName
+      project.projectName = req.body.projectName
+      project.description = req.body.description
 
       project.save()
-      res.json(project)
+      res.send('Proyecto actualizado')
     } catch (error) {
       console.log(error)
     }
@@ -78,7 +83,7 @@ export class ProjectController {
 
       //elimina un registro
       await project.deleteOne()
-      res.json({msg : 'Producto eliminado'})
+      res.send('Proyecto eliminado')
     } catch (error) {
       console.log(error)
     }

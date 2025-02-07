@@ -1,21 +1,36 @@
-import { getAllProjects } from "@/services/Project_api_services"
-import { useQuery } from "@tanstack/react-query"
+import { deleteProjectById, getAllProjects } from "@/services/Project_api_services"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+import { toast } from "react-toastify"
 
 export default function ShowAllProjects() {
 
-  //cuando es get
-  const { data, isError, isLoading } = useQuery({
+  //cuando es get - obtiene datos
+  const { data, isLoading } = useQuery({
     //es unico
     queryKey: ['projects'],
     queryFn: getAllProjects
   })
 
-  if (isLoading) return 'Cargando'
+  //Fuerza un refreash
+  const queryClient = useQueryClient()
 
+  //Modifica los datos
+  const {mutate} = useMutation({
+    mutationFn : deleteProjectById,
+    onError : (error) => {
+      toast.error(error.message)
+    },
+    onSuccess : (data) => {
+      toast.success(data)
+      queryClient.invalidateQueries({queryKey : ['projects']})
+    }
+  })
+
+  if (isLoading) return 'Cargando'
 
   return (
     <>
@@ -52,13 +67,13 @@ export default function ShowAllProjects() {
                           className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
                         >
                           <Menu.Item>
-                            <Link to={``}
+                            <Link to={`/projects/${project._id}`}
                               className='block px-3 py-1 text-sm leading-6 text-gray-900'>
                               Ver Proyecto
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
-                            <Link to={``}
+                            <Link to={`/projects/${project._id}/edit`}
                               className='block px-3 py-1 text-sm leading-6 text-gray-900'>
                               Editar Proyecto
                             </Link>
@@ -67,7 +82,7 @@ export default function ShowAllProjects() {
                             <button
                               type='button'
                               className='block px-3 py-1 text-sm leading-6 text-red-500'
-                              onClick={() => { }}
+                              onClick={() => mutate(project._id)}
                             >
                               Eliminar Proyecto
                             </button>
