@@ -1,7 +1,10 @@
 import AddTaskModal from "@/components/tasks/AddTaskModal"
+import TaskList from "@/components/tasks/TaskList"
 import { getProjectById } from "@/services/Project_api_services"
 import { useQuery } from "@tanstack/react-query"
 import { Navigate, useNavigate, useParams } from "react-router-dom"
+import GetTask from "../tasks/GetTask"
+import ModalDetailsTask from "../tasks/ModalDetailsTask"
 
 export default function ProjectDetails() {
   const navigate = useNavigate()
@@ -31,7 +34,19 @@ export default function ProjectDetails() {
         Agregar tarea
       </button>
 
+      {/* Modal para agregar una tarea */}
       <AddTaskModal/>
+      
+      {/* Mostrar las tareas segun su edado */}
+      <TaskList
+        tasks={data.tasks}
+      />
+
+      {/* Para mostrar el modal de editar tarea */}
+      <GetTask/>
+
+      {/* Detalles de una tarea */}
+      <ModalDetailsTask/>
     </div>
   )
 }

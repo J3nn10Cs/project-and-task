@@ -18,6 +18,27 @@ export const dashboardProjectSchema = z.array(
   })
 )
 
+export const taskStatusSchema = z.enum([
+  "pending",
+  "onHold",
+  "inProgress",
+  "underReview",
+  "completed",
+])
+
+
+//*Task
+export const taskSchmea = z.object({
+  _id : z.string(),
+  name : z.string(),
+  description : z.string(),
+  project : z.string(),
+  status : taskStatusSchema
+})
+
+export type Task = z.infer<typeof taskSchmea>
+export type TaskFormData = Pick<Task, 'name' | 'description'>
+
 //? para no generar diferentes schemas
 export type Project = z.infer<typeof projectSchema>
 

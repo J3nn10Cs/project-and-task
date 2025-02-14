@@ -4,6 +4,7 @@ import DashboardView from "./views/DashboardView";
 import CreateProjectView from "./views/projects/CreateProjectView";
 import EditProjectView from "./views/projects/EditProjectView";
 import ProjectDetails from "./views/projects/ProjectDetails";
+import EditTaskById from "./views/tasks/GetTask";
 
 export default function Router() {
   return (
@@ -16,6 +17,7 @@ export default function Router() {
           <Route path="/projects/create" element={<CreateProjectView/>}/>
           <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
           <Route path="/projects/:projectId" element={<ProjectDetails/>}/>
+          <Route path="/projects/:projectId/task/taskid" element={<EditTaskById/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

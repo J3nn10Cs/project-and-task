@@ -16,12 +16,12 @@ export default function AppLayout() {
         </div>
       </header>
 
-      <section className="md:max-w-6xl md:mx-auto m-5">
+      <section className="md:max-w-7xl md:mx-auto m-5">
         <Outlet/>
       </section>
 
-      <footer>
-        <p className="text-xs font-medium text-center">Todos los derechos reservados {new Date().getFullYear()}</p>
+      <footer className="mb-3">
+        <p className="text-sm font-medium text-center">Todos los derechos reservados {new Date().getFullYear()}</p>
       </footer>
 
       <ToastContainer

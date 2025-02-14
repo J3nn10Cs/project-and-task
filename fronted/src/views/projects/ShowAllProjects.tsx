@@ -7,7 +7,6 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { toast } from "react-toastify"
 
 export default function ShowAllProjects() {
-
   //cuando es get - obtiene datos
   const { data, isLoading } = useQuery({
     //es unico
@@ -15,7 +14,7 @@ export default function ShowAllProjects() {
     queryFn: getAllProjects
   })
 
-  //Fuerza un refreash
+  //Fuerza un refreash - para que se pueda ver el nuevo proyecto agregado
   const queryClient = useQueryClient()
 
   //Modifica los datos
@@ -42,7 +41,7 @@ export default function ShowAllProjects() {
                 <li key={project._id} className="flex justify-between gap-x-6 px-5 py-10">
                   <div className="flex min-w-0 gap-x-4">
                     <div className="min-w-0 flex-auto space-y-2">
-                      <Link to={``}
+                      <Link to={`/projects/${project._id}`}
                         className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
                       >{project.projectName}</Link>
                       <p className="text-sm text-gray-400 font-semibold mt-2">
@@ -57,7 +56,7 @@ export default function ShowAllProjects() {
                     <Menu as="div" className="relative flex-none">
                       <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
                         <span className="sr-only">opciones</span>
-                        <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true" />
+                        <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true"/>
                       </Menu.Button>
                       <Transition as={Fragment} enter="transition ease-out duration-100"
                         enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100"

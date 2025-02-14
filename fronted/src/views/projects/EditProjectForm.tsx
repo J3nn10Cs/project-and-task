@@ -21,6 +21,7 @@ export default function EditProjectForm({data, projectId} : EditProjectFormProps
     description : data.description
   }})
 
+  //para invalidar info y que se actualice sin recargar
   const queryClient = useQueryClient()
   //Use mutation para actualizar
   const {mutate} = useMutation({

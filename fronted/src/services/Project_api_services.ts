@@ -33,6 +33,7 @@ export async function getAllProjects() {
     }
   }
 }
+
 //*Obtener solo un proyecto por su ID
 export async function getProjectById(id : Project['_id']) {
   //manda la peticion con axios
@@ -68,7 +69,7 @@ export async function updatePorjectById({projectId, formData } : ProjectApiType)
   }
 }
 
-//*Actualizar proyecto por su ID
+//*Eliminar proyecto por su ID
 export async function deleteProjectById( projectId : Project['_id'] ) {
   //manda la peticion con axios
   try {
