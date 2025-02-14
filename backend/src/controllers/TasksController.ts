@@ -82,7 +82,7 @@ export class TasksController {
       await req.task.save()
       res.send('Tarea actualizada')
     } catch (error) {
-      res.status(500).json({error : 'Producto no encontrado' })
+      res.status(500).json({error : 'Tarwea no encontrado' })
     }
   }
 }

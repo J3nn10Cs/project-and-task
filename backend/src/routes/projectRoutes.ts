@@ -87,8 +87,8 @@ router.delete('/:projectId/task/:taskid',
 )
 
 //actualizar status
-router.post('/:projectId/task/:taskId/status',
-  param('taskId')
+router.post('/:projectId/task/:taskid/status',
+  param('taskid')
     .isMongoId().withMessage('El nombre de la tarea es obligatorio'),
   body('status')
     .notEmpty().withMessage('La estado es obligatorio'),
