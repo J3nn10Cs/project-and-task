@@ -13,6 +13,8 @@
       "@/layouts/*" : ["layouts/*"],
       "@/services/*" : ["services/*"],
       "@/lib/*" : ["lib/*"],
+      "@/utils/*" : ["utils/*"],
+      "@/locales/*" : ["locales/*"],
     },
 
     /* Bundler mode */

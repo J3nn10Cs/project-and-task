@@ -16,6 +16,7 @@ type EditTaskProps = {
 
 export default function EditTask({data, taskId, projectId} : EditTaskProps) {
   const {register, formState : {errors}, handleSubmit} = useForm({
+    //para obtener los valores
     defaultValues : {
       name : data.name,
       description : data.description,

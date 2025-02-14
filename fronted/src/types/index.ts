@@ -33,7 +33,9 @@ export const taskSchmea = z.object({
   name : z.string(),
   description : z.string(),
   project : z.string(),
-  status : taskStatusSchema
+  status : taskStatusSchema,
+  createdAt : z.string(),
+  updatedAt : z.string()
 })
 
 export type Task = z.infer<typeof taskSchmea>
@@ -44,3 +46,6 @@ export type Project = z.infer<typeof projectSchema>
 
 //* Para el formulario - solo lo que vamos a necesitar para nuestro form
 export type ProjectFormData = Pick<Project, 'clientName' | 'projectName' | 'description'>
+
+//* Los estatus
+export type StatusData = z.infer<typeof taskStatusSchema>

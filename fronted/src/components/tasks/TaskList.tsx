@@ -1,5 +1,6 @@
 import { Task } from "types"
 import TaskCard from "./TaskCard"
+import { statusTranlations } from "@/locales/es"
 
 type TaskListProps ={
   tasks : Task[]
@@ -21,15 +22,6 @@ const initialStatus : GroupTasks = {
   inProgress : [],
   underReview : [],
   completed : [],
-}
-
-//Diccionario de los status - la clave es string y el valor tambien 
-const statusTranlations : {[key : string] : string} = {
-  pending : "Pendiente",
-  onHold : "En espera",
-  inProgress : "En progreso",
-  underReview : "En revisión",
-  completed : "Completado",
 }
 
 //Diccionario de los status para los estilos

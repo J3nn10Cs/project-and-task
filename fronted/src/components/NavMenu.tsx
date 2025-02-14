@@ -32,7 +32,7 @@ export default function NavMenu() {
               className='block p-2 hover:text-purple-950'
             >Mis Proyectos</Link>
             <button
-              className='block p-2 hover:text-purple-950'
+              className='block p-2 hover:text-purple-950 hover:cursor-pointer'
               type='button'
               onClick={() => { }}
             >

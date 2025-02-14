@@ -24,8 +24,6 @@ export default function GetTask() {
     enabled : !!taskId
   })
 
-  console.log(data)
-
   if(isLoading) return 'Cargando...'
   if(isError) return <Navigate to='/404'/>
 

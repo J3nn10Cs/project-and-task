@@ -45,7 +45,7 @@ export default function TaskCard({task} : TaskProps) {
         </div>
         <div className="flex shrink-0 gap-x-6">
           <Menu as="div" className="relative flex-none">
-            <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+            <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900 hover:cursor-pointer">
                 <span className="sr-only">opciones</span>
                 <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true" />
             </Menu.Button>
@@ -58,7 +58,7 @@ export default function TaskCard({task} : TaskProps) {
                       <button 
                         onClick={() => navigate(location.pathname+`?viewTask=${task._id}`)}
                         type='button' 
-                        className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                        className='block px-3 py-1 text-sm leading-6 text-gray-900 hover:cursor-pointer'>
                           Ver Tarea
                       </button>
                     </Menu.Item>
@@ -67,7 +67,7 @@ export default function TaskCard({task} : TaskProps) {
                         //tener la ruta actual
                         onClick={() => navigate(location.pathname+`?editTask=${task._id}`)}
                         type='button' 
-                        className='block px-3 py-1 text-sm leading-6 text-gray-900'
+                        className='block px-3 py-1 text-sm leading-6 text-gray-900 hover:cursor-pointer'
                       >
                           Editar Tarea
                       </button>
@@ -76,7 +76,7 @@ export default function TaskCard({task} : TaskProps) {
                     <Menu.Item>
                       <button type='button' 
                       onClick={() => mutate({taskId : task._id,projectId})}
-                      className='block px-3 py-1 text-sm leading-6 text-red-500'
+                      className='block px-3 py-1 text-sm leading-6 text-red-500 hover:cursor-pointer'
                     >
                           Eliminar Tarea
                       </button>

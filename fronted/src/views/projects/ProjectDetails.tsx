@@ -46,7 +46,8 @@ export default function ProjectDetails() {
       <GetTask/>
 
       {/* Detalles de una tarea */}
-      <ModalDetailsTask/>
+      <ModalDetailsTask
+      />
     </div>
   )
 }
