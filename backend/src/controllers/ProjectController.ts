@@ -26,7 +26,7 @@ export class ProjectController {
   static getProjectById = async (req:Request,res:Response) => {
     const {id} = req.params
     try {
-      //populate('tasks') -> para poder traer la info de las tareas
+      //populate('tasks') -> para poder traer la info de las tareas 
       const project = await Project.findById(id).populate('tasks')
 
       if(!project){

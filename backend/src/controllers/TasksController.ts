@@ -18,6 +18,7 @@ export class TasksController {
     }
   }
 
+  //obtener las tareas
   static getAllTasks = async (req:Request, res : Response) => {
     try {
       //para obtener la informacion de los proyectos
@@ -28,13 +29,14 @@ export class TasksController {
     }
   }
 
+  //obtener una tarea por su id
   static getTaskId = async (req:Request, res : Response) => {
     try {
       
       //verificamos que sea del mismo proyecto la tarea - Lo traemos desde el middleware 
-      // if(req.task.project.toString() !== req.project.id){
-      //   res.status(400).json({msg:'Accion no valida'})
-      // }
+      if(req.task.project.toString() !== req.project.id){
+        res.status(400).json({msg:'Accion no valida'})
+      }
 
       res.json(req.task)
     } catch (error) {
@@ -60,7 +62,7 @@ export class TasksController {
       
       await Promise.allSettled([req.task.deleteOne(), req.project.save()])
 
-      res.json({msg : 'Tarea eliminada correctamente'})
+      res.send('Tarea eliminada')
     } catch (error) {
       res.status(500).json({error : 'Producto no encontrado' })
     }

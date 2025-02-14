@@ -45,6 +45,7 @@ router.put('/:id',
 // Para las tareas - next resource routing
 router.param('projectId', projectExists)
 
+// crear una tarea
 router.post('/:projectId/task',
   body('name')
     .notEmpty().withMessage('El nombre de la tarea es obligatorio'),
@@ -54,6 +55,7 @@ router.post('/:projectId/task',
   TasksController.createTask
 )
 
+//obtener las tareas de un proyecto
 router.get('/:projectId/tasks',
   TasksController.getAllTasks
 )
@@ -61,6 +63,7 @@ router.get('/:projectId/tasks',
 // para validar los id de las tareas - middleware
 router.param('taskid', taskExists)
 router.param('taskid', taskBelongsProject)
+
 
 router.get('/:projectId/task/:taskid',
   param('taskid').isMongoId().withMessage('Id no valido'),
