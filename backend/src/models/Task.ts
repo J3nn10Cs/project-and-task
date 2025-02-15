@@ -8,7 +8,7 @@ const taskStatus = {
   COMPLETED : 'completed'
 } as const // solo se puede leer
 
-//se crea un diccionario que solo acepta esos valores
+//se crea un diccionario que solo acepta esos valores - Type
 export type TaskStatus = typeof taskStatus[keyof typeof taskStatus]
 
 export type TaskType = Document & {
