@@ -10,7 +10,6 @@ export default function Logo() {
         <img 
           src="/logo.svg"
           alt="logo.png"
-          className="w-36"
         />
       </Link>
     </>

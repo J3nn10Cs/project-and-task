@@ -38,6 +38,30 @@ export const taskSchmea = z.object({
   updatedAt : z.string()
 })
 
+//*Formulario Login
+export const authSchema = z.object({
+  name : z.string(),
+  email : z.string().email(),
+  password : z.string(),
+  password_confirmation : z.string(),
+  token : z.string()
+})
+
+//* Autenticacion completa 
+type Auth = z.infer<typeof authSchema>
+
+//*Crear usuario
+export type CreateUserForm = Pick<Auth, 'name' | 'email' | 'password' | 'password_confirmation'>
+
+//* Validar token
+export type ConfirmToken = Pick<Auth , 'token'>
+
+//*Para el Login
+export type LoginForm = Pick<Auth, 'email' | 'password'>
+
+//* Para Solicitar nuevo codigo
+export type RequestCode = Pick<Auth , 'email'>
+
 export type Task = z.infer<typeof taskSchmea>
 export type TaskFormData = Pick<Task, 'name' | 'description'>
 

@@ -11,7 +11,9 @@ export default function AppLayout() {
     <>
       <header className="bg-gray-800 p-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <Logo/>
+          <div className="w-36">
+            <Logo/>
+          </div>
           <NavMenu/>
         </div>
       </header>
@@ -24,6 +26,7 @@ export default function AppLayout() {
         <p className="text-sm font-medium text-center">Todos los derechos reservados {new Date().getFullYear()}</p>
       </footer>
 
+      {/* Para mostrar el toast */}
       <ToastContainer
         theme="dark"
         pauseOnHover={false}
