@@ -3,12 +3,14 @@ import { body,param } from "express-validator";
 import { ProjectController } from "../controllers/ProjectController";
 import { handleInputErrors } from "../middleware/validation";
 import { TasksController } from "../controllers/TasksController";
-import { projectExists } from "../middleware/project_middleware";
-import { taskBelongsProject, taskExists } from "../middleware/task_middleware";
+import { projectExists } from "../middleware/project.middleware";
+import { taskBelongsProject, taskExists } from "../middleware/task.middleware";
+import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router()
 
 router.post('/',
+  authenticate,
   body('projectName')
     .notEmpty().withMessage('El nombre del proyecto es obligatorio'),
   body('clientName')

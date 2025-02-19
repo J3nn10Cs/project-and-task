@@ -17,7 +17,7 @@ const TokenSchema : Schema = new Schema({
     type : Types.ObjectId,
     ref : 'Users'
   },
-  createAt : {
+  expiresAt : {
     type : Date,
     //cuando se genera obtiene la fecha por defecto
     default : Date.now(),
