@@ -21,8 +21,8 @@ export default function LoginView() {
     onError : (error) => {
       toast.error(error.message)
     },
-    onSuccess : (data) => {
-      toast.success(data)
+    onSuccess : () => {
+      toast.success('Iniciando sesion')
     }
   })
 
@@ -33,7 +33,7 @@ export default function LoginView() {
   return (
     <>
       <form 
-        className="bg-white space-y-8 p-10 rounded-tr-2xl rounded-bl-2xl mb-3.5"
+        className="bg-white space-y-3 p-10 rounded-tr-2xl rounded-bl-2xl mb-3.5"
         onSubmit={handleSubmit(handleSubmitLogin)}
         noValidate
       >
@@ -82,12 +82,19 @@ export default function LoginView() {
           className="bg-fuchsia-500 w-full mt-5 p-2 rounded-2xl mb-5 text-white font-bold hover:bg-fuchsia-700 hover:cursor-pointer"
         >Iniciar sesion</button>
       </form>
-      <nav className="flex flex-col">
+      <nav className="flex flex-col gap-6">
         <Link
           to={'/auth/create-account'}
           className="text-white text-center font-bold"
         >
           No tienes cuenta? Crea una 
+        </Link>
+
+        <Link
+          to={'/auth/forgot-password'}
+          className="text-white text-center font-bold"
+        >
+          Olvidaste tu contraseña? Restablecer 
         </Link>
       </nav>
     </>

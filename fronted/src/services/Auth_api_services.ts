@@ -1,6 +1,6 @@
 import api from "@/lib/axios";
 import { isAxiosError } from "axios";
-import { ConfirmToken, CreateUserForm, LoginForm, RequestCode } from "types";
+import { ConfirmToken, CreateUserForm, ForgotPasswordType, LoginForm, NewPasswordFormType, RequestCode } from "types";
 
 //* Crear una cuenta de usuario
 export async function createUser(formData : CreateUserForm){
@@ -30,6 +30,8 @@ export async function confirmUserToken (formData : ConfirmToken ){
 export async function login(formData : LoginForm){
   try {
     const {data} = await api.post('/auth/login', formData)
+    //guardamos en el storage
+    localStorage.setItem('Auth_Token',data);
     return data
   } catch (error) {
     if(isAxiosError(error) && error.response){
@@ -50,4 +52,38 @@ export async function codeNew(formData : RequestCode){
   }
 }
 
+//* Cambio de contraseña
+export async function forgotPassword(formData : ForgotPasswordType){
+  try {
+    const {data} = await api.post('/auth/forgot-password', formData)
+    return data
+  } catch (error) {
+    if(isAxiosError(error) && error.response){
+      throw new Error(error.response.data.error)
+    }
+  }
+}
 
+//* Validar token / Cambio de contraseña
+export async function validateTokenPass(formData : ConfirmToken){
+  try {
+    const {data} = await api.post('/auth/validate-token', formData)
+    return data
+  } catch (error) {
+    if(isAxiosError(error) && error.response){
+      throw new Error(error.response.data.error)
+    }
+  }
+}
+
+//* Cambio de contraseña
+export async function changePass({token,formData} : {formData : NewPasswordFormType, token : ConfirmToken['token']}){
+  try {
+    const {data} = await api.post(`/auth/change-password/${token}`, formData)
+    return data
+  } catch (error) {
+    if(isAxiosError(error) && error.response){
+      throw new Error(error.response.data.error)
+    }
+  }
+}

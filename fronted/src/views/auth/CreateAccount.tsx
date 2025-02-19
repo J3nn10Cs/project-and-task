@@ -38,7 +38,7 @@ export default function CreateAccount() {
       <h1 className="font-black text-4xl text-white">Crear cuenta</h1>
       <h3 className="text-white text-xl my-3">Llena el formulario para <span className="text-fuchsia-600 font-bold">crear una cuenta</span></h3>
       <form 
-        className="bg-white space-y-8 p-8 rounded-tr-2xl rounded-bl-2xl mb-3.5"
+        className="bg-white space-y-3 p-8 rounded-tr-2xl rounded-bl-2xl mb-5"
         onSubmit={handleSubmit(handleSubmitCreateUser)}
         noValidate
       >
@@ -131,7 +131,7 @@ export default function CreateAccount() {
         >Crear cuenta </button>
       </form>
 
-      <nav className="flex flex-col">
+      <nav className="flex flex-col gap-6 mb-5">
         <Link
           to={'/auth/login'}
           className="text-white text-center font-bold"
@@ -140,7 +140,7 @@ export default function CreateAccount() {
         </Link>
 
         <Link
-          to={'/auth/login'}
+          to={'/auth/forgot-password'}
           className="text-white text-center font-bold"
         >
           Olvidaste tu contraseña? Restablecer 

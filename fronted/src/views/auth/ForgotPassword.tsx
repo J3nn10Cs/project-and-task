@@ -1,45 +1,46 @@
 import { useForm } from "react-hook-form"
-import { RequestCode } from "types"
 import ErrorMessage from "@/components/ErrorMessage"
 import { Link } from "react-router-dom"
+import { ForgotPasswordType } from "types"
 import { useMutation } from "@tanstack/react-query"
-import { codeNew } from "@/services/Auth_api_services"
+import { forgotPassword } from "@/services/Auth_api_services"
 import { toast } from "react-toastify"
 
-export default function RequestNewCode() {
+export default function ForgotPassword() {
 
-  const initialValues : RequestCode = {
+  const initialValues : ForgotPasswordType = {
     email : ''
   }
 
+  const {formState : {errors},reset,register,handleSubmit} = useForm({defaultValues : initialValues})
+
   const {mutate} = useMutation({
-    mutationFn : codeNew,
+    mutationFn : forgotPassword,
     onError : (error) => {
       toast.error(error.message)
     },
     onSuccess : (data) => {
       toast.success(data)
+      reset()
     }
   })
 
-  const handleNewCode = (formData : RequestCode) => {
+  const handleSubmitForgotPass = (formData : ForgotPasswordType) => {
     mutate(formData)
   }
 
-  const {handleSubmit,register, formState : {errors}} = useForm({defaultValues : initialValues})
-
   return (
     <>
-      <h1 className="text-4xl font-black text-white">Solicitar codigo de Confirmacion</h1>
+      <h1 className="text-4xl font-black text-white">Restablecer contraseña</h1>
       <p className="lg:text-2xl font-light text-white mt-2">
-        Ingresa tu email para recibir {''}
-        <span className=" text-fuchsia-500 font-bold"> un nuevo código</span>
+        Olvitdaste tu contraseña? coloca tu email {''}
+        <span className=" text-fuchsia-500 font-bold">y restablece tu contraseña</span>
       </p>
 
       <form 
-        className="space-y-3 p-5 lg:p-10 bg-white mt-8 mb-5 rounded-4xl"
+        className="space-y-8 p-5 lg:p-10 bg-white mt-8 mb-5 rounded-4xl"
         noValidate
-        onSubmit={handleSubmit(handleNewCode)}
+        onSubmit={handleSubmit(handleSubmitForgotPass)}
       >
         <div className="mt-4">
           <label htmlFor="email" className="font-bold text-lg">
@@ -69,6 +70,7 @@ export default function RequestNewCode() {
         >Enviar codigo</button>
 
       </form>
+      
       <nav className="flex flex-col gap-6">
         <Link
           to={'/auth/login'}
@@ -78,10 +80,10 @@ export default function RequestNewCode() {
         </Link>
 
           <Link
-            to={'/auth/forgot-password'}
+            to={'/auth/create-account'}
             className="text-white text-center font-bold"
           >
-            Olvidaste tu contraseña? Restablecer 
+            No tiene cuenta? Crea una 
           </Link>
       </nav>
     </>

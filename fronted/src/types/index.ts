@@ -62,6 +62,12 @@ export type LoginForm = Pick<Auth, 'email' | 'password'>
 //* Para Solicitar nuevo codigo
 export type RequestCode = Pick<Auth , 'email'>
 
+//* Para la contraseña
+export type ForgotPasswordType = Pick<Auth , 'email'>
+
+//* Para cambiar la contraseña
+export type NewPasswordFormType = Pick<Auth , 'password' | 'password_confirmation'>
+
 export type Task = z.infer<typeof taskSchmea>
 export type TaskFormData = Pick<Task, 'name' | 'description'>
 

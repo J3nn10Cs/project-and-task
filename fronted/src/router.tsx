@@ -10,6 +10,8 @@ import LoginView from "./views/auth/LoginView";
 import CreateAccount from "./views/auth/CreateAccount";
 import ConfirmAccount from "./views/auth/ConfirmAccount";
 import RequestNewCode from "./views/auth/RequestNewCode";
+import ForgotPassword from "./views/auth/ForgotPassword";
+import NewPassword from "./views/auth/NewPassword";
 
 export default function Router() {
   return (
@@ -30,6 +32,8 @@ export default function Router() {
           <Route path="/auth/create-account" element={<CreateAccount/>}/>
           <Route path="/auth/confirm-account" element={<ConfirmAccount/>}/>
           <Route path="/auth/new-code" element={<RequestNewCode/>}/>
+          <Route path="/auth/forgot-password" element={<ForgotPassword/>}/>
+          <Route path="/auth/new-password" element={<NewPassword/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
