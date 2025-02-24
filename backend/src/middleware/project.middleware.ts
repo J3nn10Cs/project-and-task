@@ -1,6 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import Project, { ProjectType } from "../models/Project";
 
+//extendemos la interface para poder acceder a ella
 declare global{
   namespace Express{
     //pueden haber varios inerface con el mismo nombre

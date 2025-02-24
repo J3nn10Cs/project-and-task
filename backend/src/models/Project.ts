@@ -1,5 +1,6 @@
 import mongoose, { Document, PopulatedDoc, Schema, Types } from "mongoose";
 import { TaskType } from "./Task";
+import { IUser } from "./User";
 
 //hereda todas la propiedades de document -ts
 export type ProjectType = Document & {
@@ -8,6 +9,9 @@ export type ProjectType = Document & {
   description : string,
   //un projecto tiene varias tareas - creando la relacion
   tasks : PopulatedDoc<TaskType & Document>[]
+  //persona que genera el proyecto - campo poblado de usuario sin arreglo pq solo queremos 1
+  manager : PopulatedDoc<IUser & Document>
+  team : PopulatedDoc<IUser & Document>[]
 }
 
 //definimos el schema - mongoose
@@ -31,6 +35,17 @@ const ProjectSchema: Schema = new Schema({
     {
       type : Types.ObjectId,
       ref : 'Tasks'
+    }
+  ],
+  manager : {
+    type : Types.ObjectId,
+    //referencia de donde lo estamos relacionando
+    ref : 'Users'
+  },
+  team : [
+    {
+      type : Types.ObjectId,
+      ref : 'Users'
     }
   ]
 },{timestamps : true})

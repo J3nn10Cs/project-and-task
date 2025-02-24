@@ -12,7 +12,7 @@ export const generateJWT = (payload : UserPayload) => {
   //generamos el jwt
   const token = jwt.sign(payload,process.env.JWT_SECRET,{
     //expira en 6 meses
-    expiresIn : '6m'
+    expiresIn : '180d'
   })
 
   return token

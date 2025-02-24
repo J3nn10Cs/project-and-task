@@ -22,9 +22,8 @@ const TokenSchema : Schema = new Schema({
     //cuando se genera obtiene la fecha por defecto
     default : Date.now(),
     //cuando expira
-    expires : "10m"
   }
 })
 
-const Token = mongoose.model<IToken>('Token', TokenSchema)
+const Token = mongoose.model<IToken>('Tokens', TokenSchema)
 export default Token

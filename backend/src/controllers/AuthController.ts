@@ -1,7 +1,6 @@
 
 import { Request, Response } from "express";
 import User from "../models/User";
-import bcrypt from 'bcrypt'
 import Token from "../models/Token";
 import { generateToken } from "../utils/token";
 import { AuthEmail } from "../emails/AuthEmail";
@@ -125,7 +124,7 @@ export class AuthController {
       // //si pasamos todas las validaciones
       // res.send('Iniciando sesion')
 
-      //generamos el jwt - le pasamos el id del usaurio
+      //generamos el jwt - le pasamos el parametro del id del usaurio
       const token = generateJWT({id : userExist.id})
 
       res.send(token)
@@ -264,6 +263,12 @@ export class AuthController {
     } catch (error) {
       res.status(500).json({error : 'Hubo un error'})
     }
+  }
+
+  //* Datos del usuario autenticado
+  static user = async (req : Request, res : Response) => {
+    res.json(req.user)
+    return
   }
 }
 
