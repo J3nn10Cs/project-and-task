@@ -4,7 +4,7 @@ import ErrorMessage from "@/components/ErrorMessage"
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "react-toastify"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { login } from "@/services/Auth_api_services"
 
 export default function LoginView() {
@@ -16,6 +16,7 @@ export default function LoginView() {
 
   const {register,handleSubmit, formState : {errors}} = useForm({defaultValues : initialValues})
 
+  const navigate = useNavigate()
   const {mutate} = useMutation({
     mutationFn : login,
     onError : (error) => {
@@ -23,6 +24,7 @@ export default function LoginView() {
     },
     onSuccess : () => {
       toast.success('Iniciando sesion')
+      navigate('/')
     }
   })
 
@@ -42,7 +44,7 @@ export default function LoginView() {
             Email
           </label>
           <input 
-            type="text"
+            type="email"
             id="email"
             placeholder="Email de registro"
             className="w-full border border-gray-500 p-2 rounded mt-2"

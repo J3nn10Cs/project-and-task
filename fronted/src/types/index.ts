@@ -47,6 +47,19 @@ export const authSchema = z.object({
   token : z.string()
 })
 
+//*User
+export const userSchema = authSchema.pick({
+  name : true,
+  email : true
+}).extend({
+  _id : z.string()
+})
+
+//* Type User
+export type User = z.infer<typeof userSchema>
+
+export type TeamEmail = Pick<User , 'email'>
+
 //* Autenticacion completa 
 type Auth = z.infer<typeof authSchema>
 

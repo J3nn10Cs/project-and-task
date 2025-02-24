@@ -12,6 +12,7 @@ import ConfirmAccount from "./views/auth/ConfirmAccount";
 import RequestNewCode from "./views/auth/RequestNewCode";
 import ForgotPassword from "./views/auth/ForgotPassword";
 import NewPassword from "./views/auth/NewPassword";
+import ProjectTeamView from "./views/projects/ProjectTeamView";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
           <Route path="/projects/:projectId/edit" element={<EditProjectView/>}/>
           <Route path="/projects/:projectId" element={<ProjectDetails/>}/>
           <Route path="/projects/:projectId/task/taskid" element={<EditTaskById/>}/>
+          <Route path="/projects/:projectId/team" element={<ProjectTeamView/>}/>
         </Route>
 
         <Route element={<AuthLoyaut/>}>
@@ -34,6 +36,7 @@ export default function Router() {
           <Route path="/auth/new-code" element={<RequestNewCode/>}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword/>}/>
           <Route path="/auth/new-password" element={<NewPassword/>}/>
+          <Route path="/auth/profile" element={<NewPassword/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -18,6 +18,8 @@ export async function createProject(formData : ProjectFormData) {
 }
 //* Obtener todos los proyectos
 export async function getAllProjects() {
+  //obtenemos el token desde los lib
+
   //manda la peticion con axios
   try {
     const {data} = await api('/projects')
